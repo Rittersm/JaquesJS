@@ -68,9 +68,9 @@ $(document).ready(function(){
   function createForm() {
     $.post({
       url: api_root + "users",
-      data: {usrname: $('#user-username').val(),
-        email: $('#user-email').val(),
-        password: $('#user-password').val()},
+      data: {username: $('#user-username').val(),
+            email: $('#user-email').val(),
+            password: $('#user-password').val()},
       success: function(data){
         console.log(data)
         $('#modalWindow').modal(hide)
