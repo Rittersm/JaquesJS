@@ -13,18 +13,15 @@ $(document).ready(function(){
 
   var form_source   = $("#post-form").html();
   var form_template = Handlebars.compile(form_source);
-  var form_source   = $("#user-login").html();
+  var form_source   = $("#login-form").html();
   var login_template = Handlebars.compile(form_source);
   var form_source   = $("#user-form").html();
   var user_template = Handlebars.compile(form_source);
   var source   = $("#note-template").html();
   var template = Handlebars.compile(source);
 
-  var api_root = 'https://safe-bayou-88361.herokuapp.com/api/'
 
-  function api_token(){
-    sessionStorage.getItem('api_token')
-  }
+  var api_root = 'https://safe-bayou-88361.herokuapp.com/api/'
 
   function fetchData(){
     $.getJSON(api_root + 'notes', function(data){
@@ -39,7 +36,7 @@ $(document).ready(function(){
         title: note.title,
         body: note.body,
         tags: note.tags,
-        author: note.user.username,
+        author: note.user.username || "Anonymous",
         created: moment(note.created_at).format('MMMM Do YYYY, h:mm:ss a')};
       var html = template(context)
       $('#notes').append(html)
@@ -49,10 +46,8 @@ $(document).ready(function(){
   function noteForm() {
     $.post({
       url: api_root + "notes",
-      data: {api_token: api_token(),
-            title: $('note-title').val(),
+      data: {title: $('note-title').val(),
             body: $('note-body').val(),
-            author: $('note-author').val(),
             tags: $('note-tags').val()},
       success: function(note){
         console.log(note)
@@ -74,41 +69,42 @@ $(document).ready(function(){
       success: function(data){
         console.log(data)
         $('#modalWindow').modal(hide)
-        },
+      },
       error: function(data){
         console.log(data)
-        }
+      }
     })
   }
 
   function fillModal(template, context, title) {
-    $('#modalWindow .modal-title').text(title || {})
+    $('#modalWindow .modal-title').text(title || "")
     $('#modalWindow .modal-body').html(template(context || {}))
   }
 
   fetchData()
 
   $('#new-note').on('click', function(ev){
-    fillModal(form_template)
+    fillModal(form_template, "", "New Note")
     $('#modalWindow').modal('show')
   })
 
-  $('#user-login').on('click', function(ev){
-    fillModal(login_template)
+  $('#login-form').on('click', function(ev){
+    fillModal(login_template, "", "Login")
     $('#modalWindow').modal('show')
   })
 
   $('#user-create').on('click', function(ev){
-    fillModal(user_template)
+    fillModal(user_template, "", "New User")
     $('#modalWindow').modal('show')
   })
+
 
   $(document.body).on('submit', '#note-form', function(ev){
     ev.preventDefault()
     noteForm()
   })
 
-  $(document.body).on('submit', '#user-login', function(ev){
+  $(document.body).on('submit', '#login-form', function(ev){
     ev.preventDefault()
     loginForm()
   })
