@@ -80,7 +80,7 @@
       </form>
     </script>
     <div class="row">
-        <h1 class="text-center">Notemeister 5000</h1>
+        <a href="#" id="headline"><h1 class="text-center" id="headline2">Notemeister 5000</h1></a>
     </div>
     <div class="row">
       <div class="col-md-1 col-md-offset-10">
@@ -94,6 +94,7 @@
         <a href="#" class="btn btn-large btn-primary" id="new-note">Create New Note</a>
       </div>
     </div>
+    </br>
     <div class="container">
       <div id="notes"></div>
     </div>
@@ -101,9 +102,9 @@
       <div class="well well-lg">
         <h2>{{title}}</h2>
         <p>{{body}}</p>
-        <ul class="list-unstyled list-inline">
+        <ul class="list-unstyled list-inline" id="tag-show">
           {{#each tags}}
-          <li><a href="#" id="tag-show">{{this.name}}</a> </li>
+          <li><a href="#">{{this.name}}</a> </li>
           {{/each}}
         </ul>
         <small>On: {{created}}</small>

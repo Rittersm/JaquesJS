@@ -1,3 +1,9 @@
 footer {
   height: 25px;
 }
+
+body {
+  background: url("http://2.bp.blogspot.com/-_YPJxuT-I38/T9iRckWIw1I/AAAAAAAAFvI/yziarFH4iqc/s1600/Blue-wallpaper-12.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}

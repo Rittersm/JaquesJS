@@ -31,6 +31,8 @@ $(document).ready(function(){
     })
   }
 
+
+
   function noteForm() {
     $.post({
       url: api_root + "notes",
@@ -39,8 +41,7 @@ $(document).ready(function(){
             tags: $('#note-tags').val()},
       success: function(note){
         console.log(note)
-        $('#notes').prepend("Hello there")
-        $('#notes').prepend(note-template(note))
+        $('#notes').prepend(template(note.note))
         $('#modalWindow').modal('hide')
       },
       error: function(note){
@@ -87,6 +88,21 @@ $(document).ready(function(){
     $('#modalWindow').modal('show')
   })
 
+  $(document.body).on('click', '#headline', function(ev){
+    ev.preventDefault()
+    $('#notes').html("")
+    fetchData()
+    $('#headline2').text('Notemeister 5000')
+  })
+
+  $(document.body).on('click', '#tag-show a', function(ev){
+    ev.preventDefault()
+    $.getJSON(api_root+ "notes/tag/" +ev.target.text, function(data) {
+      $('#notes').html("")
+      pageDisplay(data.tag.notes);
+      $('#headline2').text('Notemeister 5000: ' + ev.target.text)
+    })
+  })
 
   $(document.body).on('submit', '#note-form', function(ev){
     ev.preventDefault()
