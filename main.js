@@ -1,14 +1,3 @@
-Handlebars.registerHelper('paragraphSplit', function(plaintext) {
-  var i, output = '',
-      lines = plaintext.split(/\r\n|\r|\n/g);
-  for (i = 0; i < lines.length; i++) {
-      if(lines[i]) {
-          output += '<p>' + lines[i] + '</p>';
-      }
-  }
-  return new Handlebars.SafeString(output);
-});
-
 $(document).ready(function(){
 
   var form_source   = $("#post-form").html();
@@ -36,7 +25,6 @@ $(document).ready(function(){
         title: note.title,
         body: note.body,
         tags: note.tags,
-        author: note.user.username || "Anonymous",
         created: moment(note.created_at).format('MMMM Do YYYY, h:mm:ss a')};
       var html = template(context)
       $('#notes').append(html)
@@ -46,11 +34,12 @@ $(document).ready(function(){
   function noteForm() {
     $.post({
       url: api_root + "notes",
-      data: {title: $('note-title').val(),
-            body: $('note-body').val(),
-            tags: $('note-tags').val()},
+      data: {title: $('#note-title').val(),
+            body: $('#note-body').val(),
+            tags: $('#note-tags').val()},
       success: function(note){
         console.log(note)
+        $('#notes').prepend("Hello there")
         $('#notes').prepend(note-template(note))
         $('#modalWindow').modal('hide')
       },

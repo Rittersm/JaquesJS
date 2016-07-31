@@ -94,21 +94,21 @@
         <a href="#" class="btn btn-large btn-primary" id="new-note">Create New Note</a>
       </div>
     </div>
-    <div id="notes" class="container">
-      <script id="note-template" type="text/x-handlebars-template">
-        <div class="well well-lg">
-          <h2>{{title}}</h2>
-          <p>{{paragraphSplit body}}</p>
-          <ul class="list-unstyled list-inline">
-            {{#each tags}}
-            <li><a href="#" id="tag-show">{{this.name}}</a> </li>
-            {{/each}}
-          </ul>
-          <small>Written by: {{author}}</small>
-          <small>On: {{created}}</small>
-        </div>
-      </script>
-
+    <div class="container">
+      <div id="notes"></div>
+    </div>
+    <script id="note-template" type="text/x-handlebars-template">
+      <div class="well well-lg">
+        <h2>{{title}}</h2>
+        <p>{{body}}</p>
+        <ul class="list-unstyled list-inline">
+          {{#each tags}}
+          <li><a href="#" id="tag-show">{{this.name}}</a> </li>
+          {{/each}}
+        </ul>
+        <small>On: {{created}}</small>
+      </div>
+    </script>
     <footer class="row"></footer>
   </body>
 </html>
