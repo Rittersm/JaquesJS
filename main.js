@@ -58,7 +58,25 @@ $(document).ready(function(){
             password: $('#user-password').val()},
       success: function(data){
         console.log(data)
-        $('#modalWindow').modal(hide)
+        $('#modalWindow').modal("hide")
+      },
+      error: function(data){
+        console.log(data)
+      }
+    })
+  }
+
+  function loginForm() {
+    $.post({
+      url: api_root + "login",
+      data: {username: $('#login-username').val(),
+            password: $('#login-password').val()},
+      success: function(data){
+        setToken(data.user.api_token)
+        $('#notes').html('')
+        fetchData()
+        console.log(data)
+        $('#modalWindow').modal("hide")
       },
       error: function(data){
         console.log(data)
@@ -78,7 +96,7 @@ $(document).ready(function(){
     $('#modalWindow').modal('show')
   })
 
-  $('#login-form').on('click', function(ev){
+  $('#user-login').on('click', function(ev){
     fillModal(login_template, "", "Login")
     $('#modalWindow').modal('show')
   })
@@ -95,7 +113,7 @@ $(document).ready(function(){
     $('#headline2').text('Notemeister 5000')
   })
 
-  $(document.body).on('click', '#tag-show a', function(ev){
+  $(document.body).on('click', '.tag-show a', function(ev){
     ev.preventDefault()
     $.getJSON(api_root+ "notes/tag/" +ev.target.text, function(data) {
     $('#notes').html("")
@@ -104,25 +122,30 @@ $(document).ready(function(){
     })
   })
 
-  $(window).on('hashchange', function(ev) {
-    var id = window.location.hash.replace('#');
+
+
+    window.addEventListener("hashchange", urlChecker(), false)
+    function urlChecker(){
+    var id = window.location.hash.replace("#", '');
     $.getJSON(api_root + "notes/" + id, function(data){
-    fillModal(noteTemplate, data.note, "");
+    fillModal(note_template, data.note, "");
     $('#modalWindow').modal('show')
-    )}
-  })
+    })
+  }
+
+
 
   $(document.body).on('submit', '#note-form', function(ev){
     ev.preventDefault()
     noteForm()
   })
 
-  $(document.body).on('submit', '#login-form', function(ev){
+  $(document.body).on('submit', '#user-login', function(ev){
     ev.preventDefault()
     loginForm()
   })
 
-  $(document.body).on('submit', '#user-create', function(ev){
+  $(document.body).on('submit', '#create-form', function(ev){
     ev.preventDefault()
     createForm()
   })
