@@ -47,10 +47,10 @@
     </div>
 
     <script id="note-template" type="text/x-handlebars-template">
-      <div class="well well-lg">
+      <div class="well well-lg" id="noteid-{{id}}">
         <h2>{{title}}</h2>
         <p>{{body}}</p>
-        <ul class="list-unstyled list-inline" id="tag-show">
+        <ul class="list-unstyled list-inline tag-show">
           {{#each tags}}
           <li><a href="#">{{this.name}}</a> </li>
           {{/each}}
@@ -111,7 +111,7 @@
         </fieldset>
       </form>
     </script>
-    
+
     <script id="login-form" type="text/x-handlebars-template">
       <form id="user-login">
         <fieldset class="text-center">

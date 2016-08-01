@@ -24,6 +24,7 @@ $(document).ready(function(){
   function pageDisplay(obj) {
     $.each(obj, function(i, note){
       var context = {
+        id: note.id,
         title: note.title,
         body: note.body,
         tags: note.tags,
@@ -127,11 +128,13 @@ $(document).ready(function(){
     window.addEventListener("hashchange", urlChecker(), false)
     function urlChecker(){
     var id = window.location.hash.replace("#", '');
-    $.getJSON(api_root + "notes/" + id, function(data){
-    fillModal(note_template, data.note, "");
-    $('#modalWindow').modal('show')
-    })
-  }
+    if (window.location.hash.length > 1){
+      $.getJSON(api_root + "notes/" + id, function(data){
+      fillModal(note_template, data.note, "");
+      $('#modalWindow').modal('show')
+    }
+    )}
+    }
 
 
 
