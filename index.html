@@ -26,59 +26,6 @@
         </div>
       </div>
     </div>
-    <script id="post-form" type="text/x-handlebars-template">
-      <form id="note-form">
-        <fieldset class="text-center">
-          <input id="note-title" name="title" placeholder="Note Title" ></input>
-        </fieldset>
-        </br>
-        <fieldset class="text-center">
-          <textarea id="note-body" rows="10" cols="75" name="body" placeholder="Share your thoughts."></textarea>
-        </fieldset>
-        </br>
-        <fieldset class="text-center">
-          <input id="note-tags" name="tags" placeholder="Tag Your Note"></input>
-        </fieldset>
-        </br>
-        <fieldset class="text-center">
-          <button type="submit" class="btn btn-large btn-primary">Post Your Note</button>
-        </fieldset>
-      </form>
-    </script>
-    <script id="user-form" type="text/x-handlebars-template">
-      <form id="create-form">
-        <fieldset class="text-center">
-          <input id="user-username" name="username" placeholder="Username" ></input>
-        </fieldset>
-        </br>
-        <fieldset class="text-center">
-          <input id="user-email" name="email" placeholder="Email Address"></input>
-        </fieldset>
-        </br>
-        <fieldset class="text-center">
-          <input id="user-password" name="password" placeholder="Password"></input>
-        </fieldset>
-        </br>
-        <fieldset class="text-center">
-          <button type="submit" class="btn btn-large btn-primary">Register</button>
-        </fieldset>
-      </form>
-    </script>
-    <script id="login-form" type="text/x-handlebars-template">
-      <form id="user-login">
-        <fieldset class="text-center">
-          <input id="login-username" name="username" placeholder="Username" ></input>
-        </fieldset>
-        </br>
-        <fieldset class="text-center">
-          <input id="login-password" name="password" placeholder="Password"></input>
-        </fieldset>
-        </br>
-        <fieldset class="text-center">
-          <button type="submit" class="btn btn-large btn-primary">Log In</button>
-        </fieldset>
-      </form>
-    </script>
     <div class="row">
         <a href="#" id="headline"><h1 class="text-center" id="headline2">Notemeister 5000</h1></a>
     </div>
@@ -98,6 +45,7 @@
     <div class="container">
       <div id="notes"></div>
     </div>
+
     <script id="note-template" type="text/x-handlebars-template">
       <div class="well well-lg">
         <h2>{{title}}</h2>
@@ -110,6 +58,76 @@
         <small>On: {{created}}</small>
       </div>
     </script>
+
+    <script id="modalNote" type="text/x-handlebars-template">
+      <div>
+        <h2>{{title}}</h2>
+        <p>{{body}}</p>
+        <ul class="list-unstyled list-inline" id="tag-show">
+          {{#each tags}}
+          <li><a href="#">{{this.name}}</a> </li>
+          {{/each}}
+        </ul>
+        <small>On: {{created}}</small>
+      </div>
+    </script>
+
+    <script id="post-form" type="text/x-handlebars-template">
+      <form id="note-form">
+        <fieldset class="text-center">
+          <input id="note-title" name="title" placeholder="Note Title" ></input>
+        </fieldset>
+        </br>
+        <fieldset class="text-center">
+          <textarea id="note-body" rows="10" cols="75" name="body" placeholder="Share your thoughts."></textarea>
+        </fieldset>
+        </br>
+        <fieldset class="text-center">
+          <input id="note-tags" name="tags" placeholder="Tag Your Note"></input>
+        </fieldset>
+        </br>
+        <fieldset class="text-center">
+          <button type="submit" class="btn btn-large btn-primary">Post Your Note</button>
+        </fieldset>
+      </form>
+    </script>
+
+    <script id="user-form" type="text/x-handlebars-template">
+      <form id="create-form">
+        <fieldset class="text-center">
+          <input id="user-username" name="username" placeholder="Username" ></input>
+        </fieldset>
+        </br>
+        <fieldset class="text-center">
+          <input id="user-email" name="email" placeholder="Email Address"></input>
+        </fieldset>
+        </br>
+        <fieldset class="text-center">
+          <input id="user-password" name="password" placeholder="Password"></input>
+        </fieldset>
+        </br>
+        <fieldset class="text-center">
+          <button type="submit" class="btn btn-large btn-primary">Register</button>
+        </fieldset>
+      </form>
+    </script>
+
+    <script id="login-form" type="text/x-handlebars-template">
+      <form id="user-login">
+        <fieldset class="text-center">
+          <input id="login-username" name="username" placeholder="Username" ></input>
+        </fieldset>
+        </br>
+        <fieldset class="text-center">
+          <input id="login-password" name="password" placeholder="Password"></input>
+        </fieldset>
+        </br>
+        <fieldset class="text-center">
+          <button type="submit" class="btn btn-large btn-primary">Log In</button>
+        </fieldset>
+      </form>
+    </script>
+
     <footer class="row"></footer>
   </body>
 </html>

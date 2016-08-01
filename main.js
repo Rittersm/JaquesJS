@@ -8,6 +8,8 @@ $(document).ready(function(){
   var user_template = Handlebars.compile(form_source);
   var source   = $("#note-template").html();
   var template = Handlebars.compile(source);
+  var note_source= $("#modalNote").html();
+  var note_template = Handlebars.compile(note_source)
 
 
   var api_root = 'https://safe-bayou-88361.herokuapp.com/api/'
@@ -30,8 +32,6 @@ $(document).ready(function(){
       $('#notes').append(html)
     })
   }
-
-
 
   function noteForm() {
     $.post({
@@ -98,10 +98,18 @@ $(document).ready(function(){
   $(document.body).on('click', '#tag-show a', function(ev){
     ev.preventDefault()
     $.getJSON(api_root+ "notes/tag/" +ev.target.text, function(data) {
-      $('#notes').html("")
-      pageDisplay(data.tag.notes);
-      $('#headline2').text('Notemeister 5000: ' + ev.target.text)
+    $('#notes').html("")
+    pageDisplay(data.tag.notes);
+    $('#headline2').text('Notemeister 5000: ' + ev.target.text)
     })
+  })
+
+  $(window).on('hashchange', function(ev) {
+    var id = window.location.hash.replace('#');
+    $.getJSON(api_root + "notes/" + id, function(data){
+    fillModal(noteTemplate, data.note, "");
+    $('#modalWindow').modal('show')
+    )}
   })
 
   $(document.body).on('submit', '#note-form', function(ev){
