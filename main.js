@@ -14,6 +14,21 @@ $(document).ready(function(){
 
   var api_root = 'https://safe-bayou-88361.herokuapp.com/api/'
 
+  function getToken(){
+    return sessionStorage.getItem('api_token')
+  }
+
+  function setToken(token){
+    sessionStorage.setItem('api_token', token)
+    return sessionStorage.getItem('api_token')
+  }
+
+  function forgetToken(){
+    sessionStorage.removeItem('api_token')
+  }
+
+
+
   function fetchData(){
     $.getJSON(api_root + 'notes', function(data){
       console.log(data)
@@ -73,6 +88,8 @@ $(document).ready(function(){
       data: {username: $('#login-username').val(),
             password: $('#login-password').val()},
       success: function(data){
+        alert("hey there")
+        console.log(data)
         setToken(data.user.api_token)
         $('#notes').html('')
         fetchData()
